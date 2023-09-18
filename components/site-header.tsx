@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { MainNav } from "./main-nav";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
@@ -7,6 +8,10 @@ import { Icons } from "./icons";
 import { ThemeToggle } from "./theme-toggle";
 
 export function SiteHeader() {
+  const pathname = usePathname();
+  
+  if(pathname.startsWith("/studio")) return null
+  
     return (
       <header className="sticky top-0 z-40 w-full border-b bg-background">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between space-x-4 px-6 sm:space-x-0">
@@ -30,6 +35,13 @@ export function SiteHeader() {
               </Button>
             </Link>
             <ThemeToggle />
+            {process.env.NODE_ENV === 'development' && (
+              <Link href={'/studio'}>
+                <Button size={"sm"} variant={"ghost"}>
+                  <Icons.Edit className="h-5 w-5" />
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </header>

@@ -3,9 +3,9 @@ import { schema } from "./sanity/schema";
 import { deskTool } from "sanity/desk";
 import { visionTool } from "@sanity/vision";
 
-const projectId = process.env.projectId || ''
-const dataset = process.env.dataset || ''
-const apiVersion = process.env.apiVersionSanity
+const projectId = process.env.projectId || 'hupp6xz2'
+const dataset = process.env.dataset || 'production'
+const apiVersion = process.env.apiVersionSanity || '2023-09-16'
 
 export default defineConfig({
     basePath: "/studio",
