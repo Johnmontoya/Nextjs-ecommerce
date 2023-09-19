@@ -9,11 +9,34 @@ import { cn } from "@/lib/utils";
 import { groq } from "next-sanity";
 import Image from "next/image";
 
-export default async function Home() {
+interface Props {
+  searchParams: {
+    date?: string
+    price?: string
+    color?: string
+    category?: string
+    size?: string
+    search?: string
+  }
+}
+
+export default async function Home({searchParams}: Props) {
   //await seedSanityData() ejecutar el seed
+  const { date = "desc", price, color, category, size, search } = searchParams
+  const priceOrder = price ? `| order(price ${price})` : ""
+  const dateOrder = date ? `| order(_createdAt ${date})` : ""
+  const order = `${priceOrder}${dateOrder}`
+
+  const productFiltrer = `_type == "product"`
+  const colorFiltrer = color ? `&& "${color}" in colors` : ""
+  const categoryFiltrer = category ? `&& "${category}" in categories` : ""
+  const sizeFiltrer = size ? `&& "${size}" in sizes` : ""
+  const searchFilter = search ? `&& name match "${search}"` : ""
+  const filter = `*[${productFiltrer}${colorFiltrer}${categoryFiltrer}${sizeFiltrer}${searchFilter}]`
+
   const products = await client.fetch<
     SanityProduct[]
-  >(groq`*[_type == "product"]{
+  >(groq`${filter} ${order} {
     _id,
     _createdAt,
     name,
