@@ -23,9 +23,9 @@ export function ProductInfo({ product }: Props) {
       }
     }
     isIncart ? incrementItem(item._id) : addItem(item)
-    toast('Product added to cart', {
-      duration: 3000,
-      position: 'top-right',      
+    toast.success('Product added to cart', {
+      duration: 2000,
+      position: 'top-right'
     })
   }
 

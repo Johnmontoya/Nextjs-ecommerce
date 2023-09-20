@@ -1,3 +1,6 @@
+import { CartItems } from "@/components/cart/cart-items";
+import { CartSummary } from "@/components/cart/cart-summary";
+
 export default function Page() {
     return (
       <div>
@@ -12,8 +15,10 @@ export default function Page() {
                 Items in your shopping cart
               </h2>
               {/* Cart Items */}
+              <CartItems />
             </section>
             {/* Cart Summary */}
+            <CartSummary />
           </form>
         </main>
       </div>

@@ -1,3 +1,4 @@
+import { ProductGallery } from "@/components/product/product-gallery";
 import { ProductInfo } from "@/components/product/product-info";
 import { SanityProduct } from "@/config/inventory";
 import { client } from "@/lib/clientSanity";
@@ -33,7 +34,7 @@ export default async function Page({ params }: Props) {
         {/* Product */}
         <div className="pb-20 lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-12">
           {/* Product gallery */}
-          
+          <ProductGallery product={product} />
           {/* Product info */}
           <ProductInfo product={product} />
         </div>
